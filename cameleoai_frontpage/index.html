@@ -531,9 +531,9 @@
         .arch-container {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            gap: 2rem;
+            gap: 5rem;
             position: relative;
-            padding: 4rem 0;
+            padding: 2rem 0;
         }
 
         .arch-column {
@@ -549,12 +549,8 @@
             grid-column: 1 / 3;
         }
 
-        .col-gateway {
-            grid-column: 4 / 6;
-        }
-
         .col-core {
-            grid-column: 6 / 11;
+            grid-column: 3 / 11;
         }
 
         .col-storage {
@@ -637,9 +633,8 @@
         .core-box {
             border: 2px solid var(--primary);
             background: rgba(99, 102, 241, 0.05);
-            padding: 2rem;
+            padding: 1.5rem 1rem;
             border-radius: 20px;
-            width: 100%;
             position: relative;
         }
 
@@ -721,6 +716,381 @@
             }
 
             /* Hide complex lines on mobile */
+        }
+
+        /* Workflow Visual Pictorial Description */
+        .workflow-visual {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            align-items: center;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .wf-node {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .wf-node.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.15);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .wf-node:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: -0.8rem;
+            left: 50%;
+            width: 1px;
+            height: 0.8rem;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .wf-node:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            bottom: -0.9rem;
+            left: calc(50% - 3px);
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-top: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .wf-icon-box {
+            width: 22px;
+            height: 22px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* RAG Pipeline Mini Visual */
+        .rag-pipeline-details {
+            margin-top: 1rem;
+            padding: 1.2rem;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            text-align: left;
+            position: relative;
+        }
+
+        .rag-source-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            align-items: center;
+            min-width: 130px;
+        }
+
+        .rag-step {
+            background: #0ea5e9;
+            color: white;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .rag-db-cylinder {
+            width: 60px;
+            height: 40px;
+            background: #1e3a8a;
+            border: 1px solid #3b82f6;
+            border-radius: 50% / 10px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: white;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .rag-db-cylinder::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -1px;
+            width: 60px;
+            height: 10px;
+            background: #2563eb;
+            border: 1px solid #3b82f6;
+            border-radius: 50%;
+        }
+
+        .rag-gateway,
+        .rag-repo {
+            background: rgba(224, 242, 254, 0.9);
+            color: #0369a1;
+            border: 2px solid #7dd3fc;
+            padding: 0.7rem 1rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .rag-finetune {
+            background: #facc15;
+            color: #713f12;
+            padding: 0.6rem 1rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            border: 2px solid #eab308;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .rag-arrow-v {
+            width: 2px;
+            height: 15px;
+            background: #94a3b8;
+            position: relative;
+        }
+
+        .rag-arrow-v::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: -4px;
+            border-top: 6px solid #94a3b8;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+
+        .rag-arrow-h {
+            width: 20px;
+            height: 2px;
+            background: #94a3b8;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .rag-arrow-h::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: -4px;
+            border-left: 6px solid #94a3b8;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        /* Tenant Stack Visual Improvements */
+        .tenant-stack {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .tenant-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 24, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .tenant-layer:nth-child(1) {
+            transform: translate(-24px, -24px);
+            z-index: 1;
+            opacity: 0.2;
+        }
+
+        .tenant-layer:nth-child(2) {
+            transform: translate(-16px, -16px);
+            z-index: 2;
+            opacity: 0.4;
+        }
+
+        .tenant-layer:nth-child(3) {
+            transform: translate(-8px, -8px);
+            z-index: 3;
+            opacity: 0.6;
+        }
+
+        .tenant-layer:nth-child(4) {
+            transform: translate(0, 0);
+            z-index: 4;
+        }
+
+        .tenant-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.6rem;
+            text-align: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.5px;
+        }
+
+        .tenant-body {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .bu-stack {
+            position: relative;
+            flex: 1;
+            margin-top: 0.5rem;
+        }
+
+        .bu-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .bu-layer:nth-child(1) {
+            transform: translate(-12px, -12px);
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .bu-layer:nth-child(2) {
+            transform: translate(-6px, -6px);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        .bu-layer:nth-child(3) {
+            transform: translate(0, 0);
+            z-index: 3;
+        }
+
+        .bu-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.4rem;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-main);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .bu-body {
+            padding: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .bu-item-box {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .rag-stack-container {
+            margin-top: 0.4rem;
+            position: relative;
+            height: 50px;
+        }
+
+        .rag-stack-layer {
+            position: absolute;
+            height: 32px;
+            width: 85%;
+            background: rgba(45, 55, 72, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 800;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .rag-stack-layer:nth-child(1) {
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .rag-stack-layer:nth-child(2) {
+            bottom: 3px;
+            right: 3px;
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        .rag-stack-layer:nth-child(3) {
+            bottom: 6px;
+            right: 6px;
+            z-index: 3;
+            opacity: 0.7;
+        }
+
+        .rag-stack-layer:nth-child(4) {
+            bottom: 9px;
+            right: 9px;
+            z-index: 4;
+            background: #3b82f6;
+            border-color: #60a5fa;
+            color: white;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
         }
 
         /* Trusted By Marquee */
@@ -1226,17 +1596,24 @@
                 <div class="strategy-grid">
                     <div class="strategy-card">
                         <h4 data-i18n="challenge_1_title">Regulatory & Compliance</h4>
-                        Integrated Guardrail, citation-supported RAG pipelines alleviate these challenges and foster
-                        regulator trust.
+                        <p data-i18n="challenge_1_desc">
+                            Integrated Guardrail, citation-supported RAG pipelines alleviate these challenges and foster
+                            regulator trust.
+                        </p>
                     </div>
                     <div class="strategy-card">
                         <h4 data-i18n="challenge_2_title">Sovereign Infrastructure</h4>
-                        Sovereign, on-premises, Indonesia-compliant AI infrastructure designed for secure environments.
+                        <p data-i18n="challenge_2_desc">
+                            Sovereign, on-premises, Indonesia-compliant AI infrastructure designed for secure
+                            environments.
+                        </p>
                     </div>
                     <div class="strategy-card">
                         <h4 data-i18n="challenge_3_title">Workflow Automation</h4>
-                        WhatsApp-native AI agents instantly enhance service quality while ensuring full regulatory
-                        compliance.
+                        <p data-i18n="challenge_3_desc">
+                            WhatsApp-native AI agents instantly enhance service quality while ensuring full regulatory
+                            compliance.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1715,24 +2092,25 @@
                 </div>
             </div>
 
-            <!-- 15. Mobile Friendly -->
+            <!-- 15. Omni Channels -->
             <div class="card feature-card">
                 <div class="feature-header">
                     <div class="feature-icon">
                         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
-                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                            <path d="M12 18h.01"></path>
+                            <path
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
                         </svg>
                     </div>
-                    <div class="feature-title" data-i18n="feat_style_title">Mobile Friendly</div>
+                    <div class="feature-title" data-i18n="feat_style_title">Omni Channels</div>
                 </div>
-                <p class="feature-desc" data-i18n="feat_style_desc">Access your dashboard and AI agents on any device
-                    with responsive web design.</p>
+                <p class="feature-desc" data-i18n="feat_style_desc">Integrated communication across Whatsapp, Instagram,
+                    Telegram, Facebook, and Web chat.</p>
                 <div class="benefit-box">
                     <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
-                    <p class="benefit-text" data-i18n="feat_style_benefit">Stay connected and productive from anywhere,
-                        at any time.</p>
+                    <p class="benefit-text" data-i18n="feat_style_benefit">Unified customer engagement across all major
+                        social and messaging platforms.</p>
                 </div>
             </div>
         </div>
@@ -1741,34 +2119,28 @@
     <!-- Architecture Section -->
     <section class="architecture">
         <div class="container">
-            <h2 class="text-gradient fade-in">System Architecture</h2>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 4rem;" class="fade-in">
+            <h2 class="text-gradient fade-in" data-i18n="arch_title">System Architecture</h2>
+            <p data-i18n="arch_desc" style="text-align: center; color: var(--text-muted); margin-bottom: 4rem;"
+                class="fade-in">
                 Secure, Modular, and Scalable Design
             </p>
 
             <div class="arch-container fade-in">
                 <!-- SVG Connections Background -->
                 <svg class="connection-lines" viewBox="0 0 1200 600" preserveAspectRatio="none">
-                    <!-- Input -> Gateway -->
-                    <path class="conn-path" d="M200,150 C300,150 350,300 450,300" />
-                    <path class="conn-flow" d="M200,150 C300,150 350,300 450,300" />
+                    <!-- Input -> Core -->
+                    <path class="conn-path" d="M120,150 C200,150 200,300 280,300" />
+                    <path class="conn-flow" d="M120,150 C200,150 200,300 280,300" />
 
-                    <path class="conn-path" d="M200,300 C300,300 350,300 450,300" />
-                    <path class="conn-flow" d="M200,300 C300,300 350,300 450,300" style="animation-delay: -5s" />
+                    <path class="conn-path" d="M120,450 C200,450 200,300 280,300" />
+                    <path class="conn-flow" d="M120,450 C200,450 200,300 280,300" style="animation-delay: -10s" />
 
-                    <path class="conn-path" d="M200,450 C300,450 350,300 450,300" />
-                    <path class="conn-flow" d="M200,450 C300,450 350,300 450,300" style="animation-delay: -10s" />
+                    <!-- Core -> Storage -->
+                    <path class="conn-path" d="M980,200 C1030,200 1030,150 1080,150" />
+                    <path class="conn-flow" d="M980,200 C1030,200 1030,150 1080,150" />
 
-                    <!-- Gateway -> Core -->
-                    <path class="conn-path" d="M550,300 L600,300" />
-                    <path class="conn-flow" d="M550,300 L600,300" />
-
-                    <!-- Core -> Resources -->
-                    <path class="conn-path" d="M1000,200 C1050,200 1075,150 1100,150" />
-                    <path class="conn-flow" d="M1000,200 C1050,200 1075,150 1100,150" />
-
-                    <path class="conn-path" d="M1000,400 C1050,400 1075,450 1100,450" />
-                    <path class="conn-flow" d="M1000,400 C1050,400 1075,450 1100,450" style="animation-delay: -7s" />
+                    <path class="conn-path" d="M980,400 C1030,400 1030,450 1080,450" />
+                    <path class="conn-flow" d="M980,400 C1030,400 1030,450 1080,450" style="animation-delay: -7s" />
                 </svg>
 
                 <!-- Inputs -->
@@ -1777,23 +2149,12 @@
                         <div class="arch-node-title">
                             <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                </path>
-                            </svg>
-                            Web Client
-                        </div>
-                        <div class="arch-node-desc">React / WebSocket</div>
-                    </div>
-                    <div class="arch-node">
-                        <div class="arch-node-title">
-                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
                                 </path>
                             </svg>
-                            WhatsApp
+                            Omni Channels
                         </div>
-                        <div class="arch-node-desc">Business API</div>
+                        <div class="arch-node-desc">Whatsapp • Instagram • Telegram<br>Facebook • Web chat</div>
                     </div>
                     <div class="arch-node">
                         <div class="arch-node-title">
@@ -1803,16 +2164,7 @@
                             </svg>
                             Ext. Apps
                         </div>
-                        <div class="arch-node-desc">REST API</div>
-                    </div>
-                </div>
-
-                <!-- Gateway -->
-                <div class="arch-column col-gateway">
-                    <div class="arch-node"
-                        style="height: 100%; display: flex; flex-direction: column; justify-content: center; border-color: var(--secondary);">
-                        <div class="arch-node-title">API Gateway</div>
-                        <div class="arch-node-desc">Auth • Rate Limit • Route</div>
+                        <div class="arch-node-desc">REST API / SDK</div>
                     </div>
                 </div>
 
@@ -1820,29 +2172,103 @@
                 <div class="arch-column col-core">
                     <div class="core-box">
                         <div class="core-label">CAMELEO CORE</div>
-                        <div style="display: flex; flex-direction: column; gap: 1rem;">
-                            <div class="arch-node" style="background: rgba(99, 102, 241, 0.1);">
-                                <div class="arch-node-title">LLM Router</div>
-                                <div class="arch-node-desc">Model Selection Logic</div>
+                        <div style="display: flex; flex-direction: row; gap: 1rem;">
+
+                            <div class="arch-column" style="width: 260px;">
+                                <div class="tenant-stack">
+                                    <div class="tenant-layer"></div>
+                                    <div class="tenant-layer"></div>
+                                    <div class="tenant-layer"></div>
+                                    <div class="tenant-layer">
+                                        <div class="tenant-header">Tenant/Organization</div>
+                                        <div class="tenant-body">
+                                            <div class="bu-stack">
+                                                <div class="bu-layer"></div>
+                                                <div class="bu-layer"></div>
+                                                <div class="bu-layer">
+                                                    <div class="bu-header">Business Unit</div>
+                                                    <div class="bu-body">
+                                                        <div class="bu-item-box">RBAC</div>
+                                                        <div class="bu-item-box">Business Logic</div>
+                                                        <div class="bu-item-box">Agent(s)</div>
+                                                        <div class="rag-stack-container">
+                                                            <div class="rag-stack-layer"></div>
+                                                            <div class="rag-stack-layer"></div>
+                                                            <div class="rag-stack-layer"></div>
+                                                            <div class="rag-stack-layer">RAG Pipeline</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                                <div class="arch-node"
-                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
-                                    <div class="arch-node-title">RAG Agent</div>
+
+                            <div style=" flex-direction: column; gap: 1rem;">
+
+                                <div class="arch-node" style="background: rgba(99, 102, 241, 0.1);">
+                                    <!-- <div class="arch-node-title">LLM Router</div>
+                                    <div class="arch-node-desc">Model Selection Logic</div>
+                                     -->
+                                    <div class="workflow-visual">
+                                        <div
+                                            style="font-size: 0.65rem; color: var(--secondary); font-weight: 800; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                                            Intelligent Workflow Builder</div>
+
+                                        <div class="wf-node">
+                                            <div class="wf-icon-box" style="color: #fbbf24;"><svg width="12" height="12"
+                                                    fill="none" stroke="currentColor" stroke-width="2"
+                                                    viewBox="0 0 24 24">
+                                                    <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                                </svg></div>
+                                            <span>Trigger: Event / Form</span>
+                                        </div>
+
+                                        <div class="wf-node active">
+                                            <div class="wf-icon-box" style="color: var(--primary);"><svg width="12"
+                                                    height="12" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M12 2a2 2 0 012 2c0 .73-.4 1.36-1 1.73V7h2a2 2 0 012 2v3h1a2 2 0 012 2v6h-2v-6h-1v-2h-3v5h1v2h-6v-2h1v-5H9v2H8v6H6v-6a2 2 0 012-2h1V9a2 2 0 012-2h2V5.73c-.6-.37-1-1-1-1.73a2 2 0 012-2zM9 11h2v2H9v-2zm4 0h2v2h-2v-2z">
+                                                    </path>
+                                                </svg></div>
+                                            <span>AI Agent Reasoning</span>
+                                        </div>
+
+                                        <div class="wf-node">
+                                            <div class="wf-icon-box" style="color: #10b981;"><svg width="12" height="12"
+                                                    fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
+                                                </svg></div>
+                                            <span>Action: Integration</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="arch-node"
-                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
-                                    <div class="arch-node-title">Tool Agent</div>
+                                <div class="rag-pipeline-details">
+                                    <div class="rag-source-box">
+                                        <div class="rag-step">Guardrails</div>
+                                        <div class="rag-arrow-v"></div>
+                                        <div class="rag-step">Embedding Model</div>
+                                        <div class="rag-arrow-v"></div>
+                                        <div class="rag-db-cylinder">Collection</div>
+                                    </div>
+
+                                    <div class="rag-arrow-h"></div>
+                                    <div class="rag-gateway">LLM Gateway</div>
+                                    <div class="rag-arrow-h"></div>
+
+                                    <div
+                                        style="display: flex; flex-direction: column; gap: 1.5rem; align-items: center;">
+                                        <div class="rag-repo">LLM Repository</div>
+                                        <div class="rag-arrow-v"
+                                            style="transform: rotate(180deg); margin-top: -0.8rem;">
+                                        </div>
+                                        <div class="rag-finetune">LLM Finetuning</div>
+                                    </div>
                                 </div>
-                                <div class="arch-node"
-                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
-                                    <div class="arch-node-title">Kafka Agent</div>
-                                    <div class="arch-node-desc">Realtime RAG</div>
-                                </div>
-                                <div class="arch-node"
-                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
-                                    <div class="arch-node-title">Traditional ML</div>
-                                    <div class="arch-node-desc">Scikit-learn / XGBoost</div>
+                                <div
+                                    style="text-align: center; margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+                                    RAG Pipeline Details
                                 </div>
                             </div>
                         </div>
@@ -1851,27 +2277,50 @@
 
                 <!-- Storage / Models -->
                 <div class="arch-column col-storage">
+                    <div class="arch-node" style="border-color: var(--primary);">
+                        <div class="arch-node-title" style="display: block;">Secured LLM<br><span
+                                style="font-size: 0.65rem; color: var(--text-muted);">(On-premise / Sovereign
+                                Cloud)</span></div>
+                        <div class="arch-node-desc">
+                            <div
+                                style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; justify-items: center;">
+                                <div title="Qwen"
+                                    style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#10B981">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                    </svg>
+                                    <span style="font-size: 0.55rem; font-weight: 700;">Qwen</span>
+                                </div>
+                                <div title="OpenAI"
+                                    style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path
+                                            d="M22.282 9.821a5.985 5.985 0 0 0-.512-4.908 6.046 6.046 0 0 0-4.747-3.118 6.03 6.03 0 0 0-5.188 1.587 6.059 6.059 0 0 0-4.658-.885 6.043 6.043 0 0 0-3.834 3.641 6.023 6.023 0 0 0 .584 5.378 5.992 5.992 0 0 0 .512 4.908 6.046 6.046 0 0 0 4.747 3.118 6.023 6.023 0 0 0 5.188-1.587 6.059 6.059 0 0 0 4.658.885 6.043 6.043 0 0 0 3.834-3.641 6.023 6.023 0 0 0-.584-5.378zM18.106 17.51a4.544 4.544 0 0 1-2.484-.737l.071-.04 3.973-2.293a.501.501 0 0 0 .251-.433V9.006l1.24.716a.042.042 0 0 1 .02.04c.002.012-.001.023-.008.038l-.001.002a4.544 4.544 0 0 1-3.062 3.64zm-5.632-6.52l.061-.035L16.51 8.662a.5.5 0 0 0 .251-.433V3.535a.04.04 0 0 1 .024-.037.042.042 0 0 1 .046.012l.001.001a4.544 4.544 0 0 1 2.376 4.148 4.544 4.544 0 0 1-1.229 3.012l-5.464 3.155-.03.017zm-4.471 6.136l1.24-.716a.499.499 0 0 0 .25-.432l.001-4.588-.061.035L5.459 13.8a.5.5 0 0 0-.251.433l.001 4.693a.042.042 0 0 1-.02.04.04.04 0 0 1-.044-.002l-.001-.001a4.544 4.544 0 0 1-1.229-3.012 4.544 4.544 0 0 1 2.376-4.148zm5.903-8.118L12.666 8.3l-.001 4.588a.5.5 0 0 0 .251.432l3.961 2.285.012.007L14.77 17.15c-.011.006-.021.009-.034.009a.042.042 0 0 1-.041-.027l0-.001a4.544 4.544 0 0 1-3.061-3.64c-.001-.013.003-.024.01-.038l6.259-3.614zm-9.39 9.17l-1.24-.716a.042.042 0 0 1-.02-.04c-.002-.012.001-.023.008-.038l.001-.002a4.544 4.544 0 0 1 3.062-3.64l2.484.737-.071.04-3.973 2.293a.501.501 0 0 0-.251.433v4.693zm8.937-2.915l-1.24.716a.042.042 0 0 1-.02-.04.04.04 0 0 1 .046-.012l.001.001a4.544 4.544 0 0 1 1.229 3.012 4.544 4.544 0 0 1-2.376 4.148l-1.24-.716a.5.5 0 0 0-.251.433l-.001 4.588.061-.035 3.973-2.293a.501.501 0 0 0 .25-.433z" />
+                                    </svg>
+                                    <span style="font-size: 0.55rem; font-weight: 700;">OpenAI</span>
+                                </div>
+                                <div title="Sahabat AI"
+                                    style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
+                                    <div
+                                        style="background: #fbbf24; color: black; padding: 2px 4px; border-radius: 4px; font-weight: 800; font-size: 0.4rem; text-align: center;">
+                                        SAHABAT-AI</div>
+                                    <span style="font-size: 0.55rem; font-weight: 700;">Sahabat AI</span>
+                                </div>
+                                <div title="Mistral AI"
+                                    style="display: flex; flex-direction: column; align-items: center; gap: 0.2rem;">
+                                    <span style="font-weight: 800; font-size: 0.7rem; color: #f97316;">Mistral</span>
+                                    <span style="font-size: 0.55rem; font-weight: 700;">Mistral AI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="arch-node">
                         <div class="arch-node-title">
-                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
-                                </path>
-                            </svg>
-                            Vector DB
+                            <img src="CameleoAILogoDesign.png" alt="CameleoAI Logo"
+                                style="width: 24px; height: 24px; margin-right: 8px;">
+                            CameleoAI
                         </div>
-                        <div class="arch-node-desc">Qdrant / Milvus / pgVector</div>
-                    </div>
-                    <div class="arch-node" style="border-color: var(--success);">
-                        <div class="arch-node-title">
-                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
-                                </path>
-                            </svg>
-                            Local LLM
-                        </div>
-                        <div class="arch-node-desc">Llama 3 / Mistral / GPTOSS / SahabatAI</div>
+                        <div class="arch-node-desc">Unified Intelligence Engine</div>
                     </div>
                 </div>
 
@@ -1934,7 +2383,7 @@
 
     <!-- Roadmap Section -->
     <div class="container roadmap">
-        <h2 style="text-align: center; margin-bottom: 4rem;">Enterprise Product Vision</h2>
+        <h2 style="text-align: center; margin-bottom: 4rem;" data-i18n="roadmap_title">Enterprise Product Vision</h2>
 
         <div class="timeline">
             <!-- 1 -->
@@ -2197,12 +2646,12 @@
                 hero_pitch: "CameleoAI membawa kekuatan Generative AI langsung ke infrastruktur Anda. Tanpa panggilan API eksternal, tanpa kebocoran data, dan kepatuhan penuh terhadap standar OJK. Rasakan kecepatan inferensi lokal dengan kecerdasan model state-of-the-art.",
                 hero_card_title: "Aman. Terenkripsi. Berdaulat.",
                 net_analyzer_desc: "<strong style='color: var(--text-main);'>Net Analyzer</strong> adalah platform analisis PCAP dan flow data kelas forensik yang dibangun untuk kecepatan, kepercayaan, dan eksplanabilitas—menggabungkan ingesti berperforma tinggi (PCAP/CSV/Parquet), telemetri canggih (pemindaian JA3/TLS, entropi, deteksi drift), dan mesin neuro-simbolik hibrida yang memadukan sensor heuristik dengan penalaran Bayesian untuk menghasilkan kesimpulan ancaman yang jelas dan dapat diaudit serta simulasi what-if interaktif. Didorong oleh Rust backend, ia memberikan pemrosesan deterministik dan aman memori dengan overhead CPU yang rendah, memungkinkan analisis cepat pada tangkapan besar sambil mengurangi risiko crash dan eksposur rantai pasokan—kritis bagi lingkungan SOC dan CISO. Setiap artefak dilindungi dengan rantai kepemilikan SHA-256, redaksi privasi (“Masked Mode”), dan hasil yang diverifikasi di backend, sehingga tim dapat menyelidiki insiden dengan percaya diri, menghasilkan laporan siap kepatuhan, dan berbagi temuan tanpa mengompromikan integritas atau data sensitif.",
-                ordering_title: "Penanganan Pesanan",
-                ordering_subtitle: "Dari Permintaan Chat ke Pesanan Terkonfirmasi",
-                ordering_desc: "GenAI mengubah penanganan pesanan dengan mengubah permintaan chat menjadi pesanan yang jelas dan akurat tanpa hambatan.",
-                complaint_title: "Penanganan Keluhan",
-                complaint_subtitle: "24/7 Triaging & Empathy",
-                complaint_desc: "Penanganan keluhan biasanya merupakan kasus penggunaan GenAI yang berdampak paling tinggi karena volume tinggi, sensitivitas waktu, dan muatan emosional.",
+                ordering_title: "Otomatisasi Regulasi Berbasis AI",
+                ordering_subtitle: "Mengurangi Risiko. Mempercepat Kepatuhan.",
+                ordering_desc: "Sektor dengan regulasi tinggi seperti perbankan, telekomunikasi, kesehatan, dan pemerintahan menghadapi kompleksitas yang semakin meningkat dalam pengelolaan pelaporan regulasi, pemantauan risiko, tata kelola data sensitif, serta dokumentasi kepatuhan. Proses-proses ini sering kali masih bersifat manual, terfragmentasi, dan membutuhkan sumber daya besar — sehingga menimbulkan keterlambatan, biaya operasional yang lebih tinggi, serta peningkatan eksposur risiko, khususnya bagi institusi menengah dan organisasi publik. CameleoAI EIP menyederhanakan alur kerja kepatuhan melalui dokumentasi berbasis AI yang terkelola dan terhubung dengan bukti (evidence-linked), menghasilkan output yang terstruktur, dapat ditelusuri, dan siap untuk regulator, sekaligus memperkuat efisiensi operasional dan kepercayaan institusi.",
+                complaint_title: "Transformasi Layanan Pelanggan",
+                complaint_subtitle: "Triaging & Respons Empatik 24/7",
+                complaint_desc: "Perusahaan di Indonesia secara luas menggunakan WhatsApp sebagai kanal utama interaksi pelanggan. Meskipun bank, telko, rumah sakit, dan institusi pemerintah sangat bergantung pada WhatsApp sebagai titik kontak digital utama, proses layanan masih sering bersifat manual, tidak konsisten, dan berbiaya tinggi. CameleoAI EIP menjembatani kesenjangan ini melalui otomasi alur kerja cerdas, menghadirkan agen AI native-WhatsApp yang kontekstual dan multibahasa untuk meningkatkan kecepatan serta kualitas layanan secara instan, dengan tetap menjaga kepatuhan regulasi yang ketat. Pelanggan merasa didengar dan dibantu dengan cepat, sementara tim Anda dapat fokus menangani kasus-kasus pengecualian tanpa harus mengulang penjelasan yang sama sepanjang hari.",
                 mission_title: "Misi",
                 mission_desc: "Menghadirkan <strong>asisten GenAI on-premise yang aman dan fungsional penuh</strong> yang mampu melakukan document intelligence & agentic automation.",
                 perf_title: "Performa",
@@ -2213,7 +2662,7 @@
                 features_subtitle: "Fitur kelas Enterprise tersedia hari ini",
                 arch_title: "Arsitektur Sistem",
                 arch_desc: "Desain Aman, Modular, dan Skalabel",
-                roadmap_title: "Visi Produk Enterprise",
+                roadmap_title: "Visi Produk Perusahaan",
                 business_benefit: "Manfaat Bisnis",
 
                 // Features Mapping (15 Total)
