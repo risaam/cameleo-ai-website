@@ -1,0 +1,2563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CameleoAI - Enterprise On-Premise GenAI</title>
+
+    <!-- Search Engine Optimization -->
+    <meta name="description"
+        content="CameleoAI is an Enterprise On-Premise GenAI platform delivering secure, local LLM solutions with RAG capabilities, ensuring data privacy and operational intelligence.">
+    <meta name="keywords"
+        content="CameleoAI, Enterprise AI, On-Premise LLM, Generative AI, RAG, Data Privacy, Corporate Intelligence, Local LLM, Enterprise Search">
+    <meta name="author" content="CameleoAI">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cameleo.ai/">
+    <meta property="og:title" content="CameleoAI - Enterprise On-Premise GenAI Platform">
+    <meta property="og:description"
+        content="Secure, private, and powerful on-premise Generative AI for enterprises. Unlock corporate intelligence with local LLMs.">
+    <meta property="og:image" content="CameleoAILogoDesign.PNG">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cameleo.ai/">
+    <meta property="twitter:title" content="CameleoAI - Enterprise On-Premise GenAI Platform">
+    <meta property="twitter:description"
+        content="Secure, private, and powerful on-premise Generative AI for enterprises. Unlock corporate intelligence with local LLMs.">
+    <meta property="twitter:image" content="CameleoAILogoDesign.PNG">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CameleoAI",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "description": "Enterprise On-Premise GenAI platform delivering secure, local LLM solutions with RAG capabilities.",
+      "image": "CameleoAILogoDesign.PNG",
+      "author": {
+          "@type": "Organization",
+          "name": "CameleoAI"
+      }
+    }
+    </script>
+    <style>
+        :root {
+            --bg-color: #050510;
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --success: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -2;
+            animation: float 20s infinite alternate;
+            opacity: 0.6;
+        }
+
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.15);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(168, 85, 247, 0.15);
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(236, 72, 153, 0.15);
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(100px);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 50px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Typography & Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .text-gradient {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Components */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            background: var(--gradient-1);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s, background 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 90px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Narration Section */
+        .narration {
+            padding: 6rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .narration-content p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .narration-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .narration-highlight {
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-main);
+        }
+
+        /* Goals Section / Highlights */
+        .highlights {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-title {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .benefit-box {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        .benefit-title {
+            color: var(--primary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .benefit-text {
+            font-size: 0.9rem;
+            color: #e0e7ff;
+        }
+
+        /* Roadmap/Recommendations Section */
+        .roadmap {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary), transparent);
+            opacity: 0.3;
+        }
+
+        .roadmap-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .roadmap-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .roadmap-content {
+            width: 45%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .roadmap-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: var(--bg-color);
+            border: 4px solid var(--secondary);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .roadmap-title {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .logo-icon {
+                width: 48px;
+            }
+
+            .narration {
+                gap: 2rem;
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .roadmap-item,
+            .roadmap-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 20px;
+            }
+
+            .roadmap-content {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .roadmap-dot {
+                left: -21px;
+                top: 2rem;
+            }
+
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 4px;
+            margin-left: 1rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-main);
+        }
+
+        /* Architecture Diagram Styles */
+        .architecture {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arch-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            position: relative;
+            padding: 4rem 0;
+        }
+
+        .arch-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .col-inputs {
+            grid-column: 1 / 3;
+        }
+
+        .col-gateway {
+            grid-column: 4 / 6;
+        }
+
+        .col-core {
+            grid-column: 6 / 11;
+        }
+
+        .col-storage {
+            grid-column: 11 / 13;
+        }
+
+        .arch-node {
+            background: rgba(15, 15, 25, 0.9);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .arch-node:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .arch-node-title {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .arch-node-desc {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .arch-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--secondary);
+        }
+
+        /* Connections */
+        .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .conn-path {
+            fill: none;
+            stroke: var(--glass-border);
+            stroke-width: 2;
+        }
+
+        .conn-flow {
+            fill: none;
+            stroke: var(--primary);
+            stroke-width: 2;
+            stroke-dasharray: 10, 10;
+            animation: flowAnimation 30s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes flowAnimation {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+
+        .core-box {
+            border: 2px solid var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+            padding: 2rem;
+            border-radius: 20px;
+            width: 100%;
+            position: relative;
+        }
+
+        .core-label {
+            position: absolute;
+            top: -12px;
+            left: 2rem;
+            background: var(--bg-color);
+            padding: 0 1rem;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Card Glow */
+        .card::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Grid Background Pattern */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+
+        @media (max-width: 1024px) {
+            .arch-container {
+                display: flex;
+                flex-direction: column;
+                gap: 4rem;
+            }
+
+            .arch-column {
+                margin-bottom: 2rem;
+            }
+
+            .col-inputs,
+            .col-gateway,
+            .col-core,
+            .col-storage {
+                grid-column: auto;
+            }
+
+            .connection-lines {
+                display: none;
+            }
+
+            /* Hide complex lines on mobile */
+        }
+
+        /* Trusted By Marquee */
+        .trusted-by {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: inline-flex;
+            animation: scroll 40s linear infinite;
+        }
+
+        .trusted-item {
+            margin: 0 3rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Use Case Rows */
+        .use-cases-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .use-case-row {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            text-align: left;
+        }
+
+        .use-case-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .use-case-visual {
+            flex: 1.2;
+        }
+
+        .use-case-visual img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .use-case-visual img:hover {
+            transform: scale(1.02);
+        }
+
+        .use-case-content {
+            flex: 1;
+        }
+
+        .use-case-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .use-case-content p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 960px) {
+
+            .use-case-row,
+            .use-case-row.reverse {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .use-case-visual,
+            .use-case-content {
+                flex: auto;
+                width: 100%;
+            }
+        }
+
+        /* Strategy Section */
+        .strategy-section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 960px) {
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .strategy-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-1);
+        }
+
+        .strategy-card h4 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .strategy-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .strategy-solution {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f97316;
+            /* Vibrant Orange from slides */
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-start;
+        }
+
+        .strategy-solution::before {
+            content: '➢';
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Chat Playground Styles */
+        .chat-playground {
+            margin-top: 5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chat-window {
+            background: #0f111a;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .chat-header {
+            background: #1e2030;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chat-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .chat-body {
+            padding: 24px;
+            height: 400px;
+            width: 100%;
+            overflow-y: auto;
+            position: relative;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            /* Monospace for terminal feel */
+            font-size: 0.9rem;
+        }
+
+        .msg {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeInMsg 0.5s forwards;
+        }
+
+        @keyframes fadeInMsg {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .msg-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+        }
+
+        .msg-avatar.user {
+            background: var(--text-muted);
+            color: var(--bg-color);
+        }
+
+        .msg-avatar.ai {
+            background: var(--primary);
+            color: white;
+        }
+
+        .msg-content {
+            flex: 1;
+            line-height: 1.6;
+        }
+
+        .citation {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-top: 4px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typing 1.4s infinite both;
+            margin: 0 2px;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            background: #050510;
+            border: 1px solid var(--glass-border);
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 4s ease-out;
+            transform: scale(1.05);
+            /* Subtle zoom in/out effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Ensure full UI fits */
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            padding: 5px 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        .carousel-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="neural-canvas"></canvas>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+    <!-- Removed static grid in favor of dynamic canvas -->
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="CameleoAILogoDesign.png" alt="CameleoAI Logo" class="logo-icon">
+                <div style="display: flex; flex-direction: column; line-height: 1.1;">
+                    <span>CameleoAI</span>
+                    <span
+                        style="font-size: 1rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px; margin-top: 4px;">Enterprise
+                        Intelligence Platform (EIP)</span>
+                </div>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <a href="#contact" class="btn" data-i18n="nav_get_started">Get Started</a>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" onclick="setLanguage('id')">ID</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Narration Hero -->
+        <section class="narration">
+            <div class="narration-content">
+                <div style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); margin-bottom: 1rem; font-weight: 600;"
+                    data-i18n="hero_eyebrow">
+                    The Privacy-First Future</div>
+                <h1 data-i18n="hero_title">Why Enterprise Needs Local <span class="text-gradient">On-Prem LLM</span>
+                </h1>
+                <p data-i18n="hero_desc">
+                    In an era where data is the new gold, relying on public cloud models exposes enterprises to
+                    unprecedented risks. Sovereignty, latency, and compliance are not just buzzwords—they are the
+                    pillars of modern operational security.
+                </p>
+                <div class="narration-highlight" style="display: inline-block; text-align: left;"
+                    data-i18n="hero_quote">
+                    "True intelligence requires not just processing power, but the absolute assurance that your data
+                    never leaves your perimeter."
+                </div>
+                <p data-i18n="hero_pitch">
+                    CameleoAI brings the power of Generative AI directly to your infrastructure. No external API calls,
+                    no data leakage, and full compliance with OJK standards. Experience the speed of local inference
+                    with the intelligence of state-of-the-art models.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-bottom: -2rem;">
+                <div style="opacity: 0.8; display: flex; flex-direction: column; align-items: center;">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5"
+                        stroke-linecap="round" stroke-linejoin="round" style="color: var(--secondary)">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                    <h3 style="margin-top: 0.5rem;" data-i18n="hero_card_title">Secure. Encrypted. Sovereign.</h3>
+                </div>
+            </div>
+
+            <div class="use-cases-container">
+                <!-- Ordering Case -->
+                <div class="card use-case-row">
+                    <div class="use-case-visual">
+                        <img src="compliance-automation.png" alt="Ordering Architecture">
+                    </div>
+                    <div class="use-case-content">
+                        <h3 data-i18n="ordering_title">AI-Powered Compliance Automation</h3>
+                        <div style="color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;"
+                            data-i18n="ordering_subtitle">
+                            Reducing Risk. Accelerating Compliance.</div>
+                        <p data-i18n="ordering_desc">
+                            Highly regulated sectors such as banking, telecommunications, healthcare, and government
+                            face increasing complexity in managing regulatory reporting, risk monitoring, sensitive data
+                            governance, and compliance documentation. These processes often remain manual, fragmented,
+                            and resource-intensive — leading to delays, higher operational costs, and increased risk
+                            exposure, particularly for mid-tier institutions and public organizations. CameleoAI EIP
+                            streamlines compliance workflows through governed, evidence-linked AI-driven documentation,
+                            enabling structured, traceable, and regulator-ready outputs that strengthen operational
+                            efficiency and institutional trust.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Complaint Case -->
+                <div class="card use-case-row reverse">
+                    <div class="use-case-visual">
+                        <img src="customer-care-transformation.png" alt="Complaint Handling">
+                    </div>
+                    <div class="use-case-content">
+                        <h3 data-i18n="complaint_title">Addressing Customer Service Transformation</h3>
+                        <div data-i18n="complaint_subtitle"
+                            style="color: var(--accent); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">
+                            24/7 Triaging & Empathy</div>
+                        <p data-i18n="complaint_desc">
+                            Indonesian enterprises widely use WhatsApp for customer engagement. Although banks, telcos,
+                            hospitals, and government institutions rely heavily on WhatsApp as their primary digital
+                            touchpoint, service processes often remain manual, inconsistent, and costly. CameleoAI EIP
+                            addresses this gap through intelligent workflow automation, enabling context-aware,
+                            multilingual, WhatsApp-native AI agents that instantly improve service speed and quality
+                            while maintaining strict regulatory compliance. Customers feel heard and helped fast, while
+                            your team focuses on exceptions instead of repeating the same explanations all day.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategic Pillars Section -->
+            <div class="strategy-section fade-in">
+                <img src="CameleoAILogoDesign.png" alt="CameleoAI Logo"
+                    style="width: 80px; margin-bottom: 1rem; opacity: 0.8;">
+                <h2 class="text-gradient" data-i18n="challenges_title">Strategic AI Transformation for Indonesia</h2>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4 data-i18n="challenge_1_title">Regulatory & Compliance</h4>
+                        Integrated Guardrail, citation-supported RAG pipelines alleviate these challenges and foster
+                        regulator trust.
+                    </div>
+                    <div class="strategy-card">
+                        <h4 data-i18n="challenge_2_title">Sovereign Infrastructure</h4>
+                        Sovereign, on-premises, Indonesia-compliant AI infrastructure designed for secure environments.
+                    </div>
+                    <div class="strategy-card">
+                        <h4 data-i18n="challenge_3_title">Workflow Automation</h4>
+                        WhatsApp-native AI agents instantly enhance service quality while ensuring full regulatory
+                        compliance.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End Main Container for Header & Hero -->
+
+    <!-- Trusted By Section (Full Width) -->
+    <div class="trusted-by" style="border-top: 1px solid var(--glass-border); margin-top: 4rem;">
+
+        <div class="marquee-content">
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+                </svg> GOVERNMENT</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z" />
+                </svg> HEALTH CARE</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z" />
+                </svg> BANKING SECTOR</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+                </svg> EDUCATION SECTOR</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 0 0-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                </svg> TELECOMMUNICATION</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2 22h20v-2H2v2zm2-4h16V6H4v12zm6-10h4v2h-4V8zm0 4h4v2h-4v-2z" />
+                </svg> MANUFACTURING</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                </svg> LEGAL & COMPLIANCE</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                </svg> ENERGY & UTILITIES</div>
+
+            <!-- Loop -->
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
+                </svg> GOVERNMENT</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z" />
+                </svg> HEALTH CARE</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 10h3v7H4zM10.5 10h3v7h-3zM2 19h20v3H2zM17 10h3v7h-3zM12 1L2 6v2h20V6z" />
+                </svg> BANKING SECTOR</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+                </svg> EDUCATION SECTOR</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2a9 9 0 0 0-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z" />
+                </svg> TELECOMMUNICATION</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M2 22h20v-2H2v2zm2-4h16V6H4v12zm6-10h4v2h-4V8zm0 4h4v2h-4v-2z" />
+                </svg> MANUFACTURING</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                </svg> LEGAL & COMPLIANCE</div>
+            <div class="trusted-item"><svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+                </svg> ENERGY & UTILITIES</div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Chat Playground Demo -->
+        <div class="chat-playground fade-in">
+            <div class="chat-window">
+                <div class="chat-header">
+                    <div class="chat-dot" style="background: #ff5f56;"></div>
+                    <div class="chat-dot" style="background: #ffbd2e;"></div>
+                    <div class="chat-dot" style="background: #27c93f;"></div>
+                    <span style="margin-left: 10px; color: var(--text-muted); font-size: 0.8rem;">CameleoAI Agent (RAG
+                        Mode)</span>
+                </div>
+                <div class="chat-body" id="chat-stream">
+                    <!-- Messages will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Net Analyzer Walkthrough -->
+        <!-- Net Analyzer Walkthrough -->
+        <div class="fade-in" style="margin-top: 6rem; padding-bottom: 4rem;">
+            <h2 class="text-gradient" style="margin-bottom: 3rem; text-align: center;">Network Analysis Capability</h2>
+
+            <div style="display: flex; gap: 3rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <!-- Image Side -->
+                <div style="flex: 1; min-width: 300px; max-width: 600px;">
+                    <div class="carousel-container" id="analyzer-carousel">
+                        <div class="carousel-slide active">
+                            <img src="showcase_1.png" alt="Net Analyzer Dashboard 1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="showcase_2.png" alt="Net Analyzer Dashboard 2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="showcase_3.png" alt="Net Analyzer Dashboard 3">
+                        </div>
+
+                        <div class="carousel-indicators">
+                            <div class="carousel-dot active" onclick="goToSlide(0)"></div>
+                            <div class="carousel-dot" onclick="goToSlide(1)"></div>
+                            <div class="carousel-dot" onclick="goToSlide(2)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Side -->
+                <div style="flex: 1; min-width: 300px; text-align: left;">
+                    <p style="color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; text-align: justify;"
+                        data-i18n="net_analyzer_desc">
+                        <strong style="color: var(--text-main);">Net Analyzer</strong> is a forensic-grade PCAP and flow
+                        analysis platform built for speed, trust, and explainability—combining high-performance
+                        ingestion (PCAP/CSV/Parquet), advanced telemetry (JA3/TLS fingerprinting, entropy, drift
+                        detection), and a hybrid neuro-symbolic engine that fuses heuristic sensors with Bayesian
+                        reasoning to produce clear, auditable threat conclusions and interactive what-if simulations.
+                        Powered by a Rust backend, it delivers deterministic, memory-safe processing with low CPU
+                        overhead, enabling fast analysis on large captures while reducing crash risk and supply-chain
+                        exposure—critical for SOC and CISO environments. Every artifact is protected with SHA-256
+                        chain-of-custody, privacy redaction (“Masked Mode”), and backend-verified results, so teams can
+                        confidently investigate incidents, generate compliance-ready reports, and share findings without
+                        compromising integrity or sensitive data.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Highlights Section -->
+    <section class="highlights">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="card">
+                    <h4 class="highlight-title" data-i18n="mission_title">Mission</h4>
+                    <p data-i18n="mission_desc">Deliver a <strong>secure, on-premise, fully functional GenAI
+                            assistant</strong> capable of
+                        document intelligence & agentic automation.</p>
+                </div>
+                <div class="card">
+                    <h4 class="highlight-title" style="color: var(--accent)" data-i18n="perf_title">Performance</h4>
+                    <p data-i18n="perf_desc">Optimized for high-performance edge compute, demonstrating power without
+                        the cloud.</p>
+                </div>
+                <div class="card">
+                    <h4 class="highlight-title" style="color: var(--secondary)" data-i18n="comp_title">Compliance Ready
+                    </h4>
+                    <p data-i18n="comp_desc">Built with <strong>OJK (Otoritas Jasa Keuangan)</strong> standards in mind,
+                        showcasing strict
+                        compliance and RAG capabilities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <div class="container features">
+        <h2 class="text-gradient" data-i18n="features_title">Platform Capabilities</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;" data-i18n="features_subtitle">
+            Enterprise-grade features
+            available today</p>
+
+        <div class="feature-grid">
+
+            <!-- 1. Smart Chat Interface -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_chat_title">AI-Powered Chat</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_chat_desc">Experience intelligent conversations with our
+                    advanced AI agents.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_chat_benefit">Enhance customer engagement with smart,
+                        context-aware interactions.</p>
+                </div>
+            </div>
+
+            <!-- 2. Omni-Channel Support -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_cite_title">Omni-Channel Support</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_cite_desc">Connect with customers across WhatsApp, Messenger,
+                    Telegram, and more from a single dashboard.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_cite_benefit">Meet your customers where they are and provide
+                        seamless support.</p>
+                </div>
+            </div>
+
+            <!-- 3. Agentic Capabilities -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_agent_title">Real-time Broadcasts</div>
+                </div>
+                <div class="feature-desc" data-i18n="feat_agent_desc">
+                    Engage your audience instantly with powerful broadcast tools. Send updates, promotions, and
+                    announcements to segmented user groups.
+                </div>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_agent_benefit">Boost engagement with timely, targeted
+                        communications.</p>
+                </div>
+            </div>
+
+            <!-- 4. Multi-Tenant -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_tenant_title">Multi-Tenant Management</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_tenant_desc">Full user & tenant isolation for enterprise-scale
+                    deployment.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_tenant_benefit">Enables secure data separation for different
+                        departments or agencies.</p>
+                </div>
+            </div>
+
+            <!-- 5. Intelligent Workflow Builder -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <path d="M7 8l3 3-3 3M13 16h4"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_qa_title">Intelligent Workflow Builder</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_qa_desc">Workflow Builder streamlines business automation with
+                    fast no-code design and seamless integrations.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_qa_benefit">Empower teams with fast, flexible automation
+                        that adapts to real business needs.</p>
+                </div>
+            </div>
+
+            <!-- 6. Trouble Ticketing -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_jira_title">Trouble Ticketing</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_jira_desc">Create, update, and view Jira tickets directly from
+                    chat within your existing workflow.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_jira_benefit">End-to-end automation seamlessly connecting
+                        chat to service management.</p>
+                </div>
+            </div>
+
+            <!-- 7. Seamless Integration -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_api_title">Seamless Integration</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_api_desc">Backend support for secure API key generation and
+                    validation for external apps.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_api_benefit">Connect your AI ecosystem with existing
+                        enterprise dashboards effortlessly.</p>
+                </div>
+            </div>
+
+            <!-- 8. RAG Foundation -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                            <path d="M14 2v6h6"></path>
+                            <path d="M16 13H8"></path>
+                            <path d="M16 17H8"></path>
+                            <path d="M10 9H8"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_rag_title">RAG Foundation</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_rag_desc">Upload OJK PDFs and convert them into searchable
+                    vector representations locally.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_rag_benefit">Instantly transforms regulatory documents into
+                        actionable knowledge.</p>
+                </div>
+            </div>
+
+            <!-- 9. LLM Router -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_router_title">LLM Router</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_router_desc">Switch between models via UI; includes model
+                    registry & configuration.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_router_benefit">Flexibility to optimize for cost, speed, or
+                        accuracy per use case.</p>
+                </div>
+            </div>
+
+            <!-- 10. Guardrails -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_sahabat_title">Guardrails</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_sahabat_desc">Ensures safe, compliant AI by controlling outputs,
+                    protecting data, and preventing risks.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_sahabat_benefit">Enables safe, responsible AI deployment
+                        across your organization.</p>
+                </div>
+            </div>
+
+            <!-- 11. Secure & Reliable -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0110 0v4"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_wa_title">Secure & Reliable</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_wa_desc">Inbound/outbound message processing with
+                    enterprise-grade encryption and security.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_wa_benefit">Keep your enterprise conversations safe with
+                        top-tier security standards.</p>
+                </div>
+            </div>
+
+            <!-- 12. Global Reach -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path
+                                d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_cloud_title">Global Reach</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_cloud_desc">Break language barriers with built-in multi-language
+                    support for global audiences.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_cloud_benefit">Communicate seamlessly with users in their
+                        preferred language.</p>
+                </div>
+            </div>
+
+            <!-- 13. Advanced RAG Pipeline -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_adv_rag_title">Advanced RAG Pipeline</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_adv_rag_desc">Header-aware chunking with semantic overlap
+                    optimized for complex regulatory data.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_adv_rag_benefit">Critical accuracy boost for legal and
+                        regulatory AI search results.</p>
+                </div>
+            </div>
+
+            <!-- 14. RBAC Architecture -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_rbac_title">RBAC Architecture</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_rbac_desc">Comprehensive role-based access control engine for
+                    enterprise security.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_rbac_benefit">Enterprise-grade security foundation for
+                        multi-agency management.</p>
+                </div>
+            </div>
+
+            <!-- 15. Mobile Friendly -->
+            <div class="card feature-card">
+                <div class="feature-header">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <path d="M12 18h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title" data-i18n="feat_style_title">Mobile Friendly</div>
+                </div>
+                <p class="feature-desc" data-i18n="feat_style_desc">Access your dashboard and AI agents on any device
+                    with responsive web design.</p>
+                <div class="benefit-box">
+                    <span class="benefit-title" data-i18n="business_benefit">Business Benefit</span>
+                    <p class="benefit-text" data-i18n="feat_style_benefit">Stay connected and productive from anywhere,
+                        at any time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+        <div class="container">
+            <h2 class="text-gradient fade-in">System Architecture</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 4rem;" class="fade-in">
+                Secure, Modular, and Scalable Design
+            </p>
+
+            <div class="arch-container fade-in">
+                <!-- SVG Connections Background -->
+                <svg class="connection-lines" viewBox="0 0 1200 600" preserveAspectRatio="none">
+                    <!-- Input -> Gateway -->
+                    <path class="conn-path" d="M200,150 C300,150 350,300 450,300" />
+                    <path class="conn-flow" d="M200,150 C300,150 350,300 450,300" />
+
+                    <path class="conn-path" d="M200,300 C300,300 350,300 450,300" />
+                    <path class="conn-flow" d="M200,300 C300,300 350,300 450,300" style="animation-delay: -5s" />
+
+                    <path class="conn-path" d="M200,450 C300,450 350,300 450,300" />
+                    <path class="conn-flow" d="M200,450 C300,450 350,300 450,300" style="animation-delay: -10s" />
+
+                    <!-- Gateway -> Core -->
+                    <path class="conn-path" d="M550,300 L600,300" />
+                    <path class="conn-flow" d="M550,300 L600,300" />
+
+                    <!-- Core -> Resources -->
+                    <path class="conn-path" d="M1000,200 C1050,200 1075,150 1100,150" />
+                    <path class="conn-flow" d="M1000,200 C1050,200 1075,150 1100,150" />
+
+                    <path class="conn-path" d="M1000,400 C1050,400 1075,450 1100,450" />
+                    <path class="conn-flow" d="M1000,400 C1050,400 1075,450 1100,450" style="animation-delay: -7s" />
+                </svg>
+
+                <!-- Inputs -->
+                <div class="arch-column col-inputs">
+                    <div class="arch-node">
+                        <div class="arch-node-title">
+                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Web Client
+                        </div>
+                        <div class="arch-node-desc">React / WebSocket</div>
+                    </div>
+                    <div class="arch-node">
+                        <div class="arch-node-title">
+                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                                </path>
+                            </svg>
+                            WhatsApp
+                        </div>
+                        <div class="arch-node-desc">Business API</div>
+                    </div>
+                    <div class="arch-node">
+                        <div class="arch-node-title">
+                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            Ext. Apps
+                        </div>
+                        <div class="arch-node-desc">REST API</div>
+                    </div>
+                </div>
+
+                <!-- Gateway -->
+                <div class="arch-column col-gateway">
+                    <div class="arch-node"
+                        style="height: 100%; display: flex; flex-direction: column; justify-content: center; border-color: var(--secondary);">
+                        <div class="arch-node-title">API Gateway</div>
+                        <div class="arch-node-desc">Auth • Rate Limit • Route</div>
+                    </div>
+                </div>
+
+                <!-- Core -->
+                <div class="arch-column col-core">
+                    <div class="core-box">
+                        <div class="core-label">CAMELEO CORE</div>
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div class="arch-node" style="background: rgba(99, 102, 241, 0.1);">
+                                <div class="arch-node-title">LLM Router</div>
+                                <div class="arch-node-desc">Model Selection Logic</div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="arch-node"
+                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
+                                    <div class="arch-node-title">RAG Agent</div>
+                                </div>
+                                <div class="arch-node"
+                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
+                                    <div class="arch-node-title">Tool Agent</div>
+                                </div>
+                                <div class="arch-node"
+                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
+                                    <div class="arch-node-title">Kafka Agent</div>
+                                    <div class="arch-node-desc">Realtime RAG</div>
+                                </div>
+                                <div class="arch-node"
+                                    style="background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2);">
+                                    <div class="arch-node-title">Traditional ML</div>
+                                    <div class="arch-node-desc">Scikit-learn / XGBoost</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage / Models -->
+                <div class="arch-column col-storage">
+                    <div class="arch-node">
+                        <div class="arch-node-title">
+                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                                </path>
+                            </svg>
+                            Vector DB
+                        </div>
+                        <div class="arch-node-desc">Qdrant / Milvus / pgVector</div>
+                    </div>
+                    <div class="arch-node" style="border-color: var(--success);">
+                        <div class="arch-node-title">
+                            <svg class="arch-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                </path>
+                            </svg>
+                            Local LLM
+                        </div>
+                        <div class="arch-node-desc">Llama 3 / Mistral / GPTOSS / SahabatAI</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Partnership Section -->
+    <section class="partnerships"
+        style="padding: 4rem 0; background: rgba(0,0,0,0.3); border-top: 1px solid var(--glass-border);">
+        <div class="container">
+            <h3
+                style="text-align: center; margin-bottom: 3rem; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.3em;">
+                Partnership</h3>
+            <div
+                style="display: flex; justify-content: center; align-items: center; gap: 4rem; flex-wrap: wrap; opacity: 0.7; filter: grayscale(1) brightness(1.5);">
+
+                <!-- Meta -->
+                <div class="partner-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                        <path
+                            d="M16.14 7c-1.12 0-2 .28-2.61.84a3.3 3.3 0 0 0-.96 2.06 4.14 4.14 0 0 1-.71 1.6 3.69 3.69 0 0 1-3.69 1.74c-1.03 0-2.37-.6-3.08-1.3A3.42 3.42 0 0 1 2 8.52c0-1.29.6-2.58 1.6-3.51 1.34-1.27 3.53-2.35 5.38-2.35a5.55 5.55 0 0 1 4.3 2.14c.94-1.21 2.45-2.14 4.14-2.14 1.85 0 4.04 1.09 5.41 2.35 1 1.25 1.6 2.22 1.6 3.51a3.42 3.42 0 0 1-1.52 3.42c-.71.69-2.05 1.3-3.08 1.3-1.54 0-2.85-.62-3.69-1.75a4.14 4.14 0 0 1-.71-1.6 3.3 3.3 0 0 0-.96-2.06c-.61-.56-1.49-.84-2.61-.84z" />
+                    </svg>
+                    <span style="font-weight: 700; font-size: 1.2rem;">Meta</span>
+                </div>
+
+                <!-- Qwen -->
+                <div class="partner-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                        <path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z" />
+                        <path d="M15 15l4 4" />
+                    </svg>
+                    <span style="font-weight: 700; font-size: 1.2rem;">Qwen</span>
+                </div>
+
+                <!-- Alibaba Cloud -->
+                <div class="partner-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                        <path d="M4 18h4v2H2v-6h2v4zm16-4h2v6h-6v-2h4v-4zM4 6v4H2V4h6v2H4zm16 0h-4V4h6v6h-2V6z" />
+                        <path d="M7 12a5 5 0 1 1 5 5 5 5 0 0 1-5-5z" />
+                    </svg>
+                    <span style="font-weight: 700; font-size: 1.2rem;">Alibaba Cloud</span>
+                </div>
+
+                <!-- AWS -->
+                <div class="partner-logo"
+                    style="display: flex; align-items: center; gap: 0.2rem; flex-direction: column;">
+                    <div style="display: flex; align-items: baseline; gap: 0.1rem;">
+                        <span style="font-weight: 800; font-size: 1.1rem; letter-spacing: -0.05em;">aws</span>
+                    </div>
+                    <svg viewBox="0 0 100 20" width="40" height="8" fill="currentColor">
+                        <path d="M0 10 Q 50 25 100 10 L 95 15 Q 50 30 5 15 Z" />
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <div class="container roadmap">
+        <h2 style="text-align: center; margin-bottom: 4rem;">Enterprise Product Vision</h2>
+
+        <div class="timeline">
+            <!-- 1 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_access_title">Advanced Access Control</h3>
+                    <p class="roadmap-desc" data-i18n="road_access_desc">Deep tenant isolation with granular roles
+                        (Admin, Analyst, Auditor) across
+                        all agents to ensure maximum government-standard security.</p>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_obs_title">Centralized Observability</h3>
+                    <p class="roadmap-desc" data-i18n="road_obs_desc">Full Prometheus + Grafana + OpenTelemetry
+                        integration for monitoring AI
+                        usage, latency, and agent activities in real-time.</p>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_sop_title">SOP & PDF Extraction Agent</h3>
+                    <p class="roadmap-desc" data-i18n="road_sop_desc">Automated policy search and structured ingestion
+                        pipelines—tailored for
+                        Banking and Pemda compliance.</p>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_multi_title">Multi-Modal Input</h3>
+                    <p class="roadmap-desc" data-i18n="road_multi_desc">Support for PDF, Image, and CSV inputs unlocking
+                        use cases like invoice
+                        reading and anomaly detection.</p>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_flow_title">Workflow Orchestration</h3>
+                    <p class="roadmap-desc" data-i18n="road_flow_desc">Visual flow builder (Ask → Analyze → Retrieve →
+                        Trigger) to democratize real
+                        enterprise automation.</p>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_opt_title">Model Performance Optimizer</h3>
+                    <p class="roadmap-desc" data-i18n="road_opt_desc">Intelligent model routing based on latency &
+                        accuracy benchmarks for
+                        distinct workloads (Mistral, SahabatAI).</p>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_deploy_title">Secure Deployment Blueprints</h3>
+                    <p class="roadmap-desc" data-i18n="road_deploy_desc">Turnkey patterns for Single-node RAG,
+                        Air-gapped clusters, and Multi-tenant
+                        environments.</p>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="roadmap-item">
+                <div class="roadmap-dot"></div>
+                <div class="roadmap-content">
+                    <h3 class="roadmap-title" data-i18n="road_vert_title">Vertical-Specific Templates</h3>
+                    <p class="roadmap-desc" data-i18n="road_vert_desc">Pre-configured assistants for Banking (AML),
+                        Government (SOP), and Telco
+                        (Ticketing) sectors.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <h3 style="margin-bottom: 1rem; color: white;">CameleoAI</h3>
+            <div style="margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+                <p><strong>Head Office</strong></p>
+                <p>PT Putra Perdana International</p>
+                <p>Menara Batavia 14th Floor JL. KH. Mas Mansyur Kavling 126, Jakarta</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="mailto:sales@putra-perdana.com"
+                        style="color: var(--primary); text-decoration: none;">sales@putra-perdana.com</a>
+                </p>
+                <p>+62.21.57930112 / +62.21.57930245</p>
+            </div>
+            <p>&copy; 2026. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.6;">Powered by Local Intelligence</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple intersection observer for fade-in animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            const animateElements = document.querySelectorAll('.card, .roadmap-content, .arch-node, .fade-in');
+
+            animateElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Language Translation Logic
+        const translations = {
+            en: {
+                nav_get_started: "Get Started",
+                hero_eyebrow: "The Privacy-First Future",
+                hero_title: "Why Enterprise Needs Local <span class=\"text-gradient\">On-Prem LLM</span>",
+                hero_desc: "In an era where data is the new gold, relying on public cloud models exposes enterprises to unprecedented risks. Sovereignty, latency, and compliance are not just buzzwords—they are the pillars of modern operational security.",
+                hero_quote: "\"True intelligence requires not just processing power, but the absolute assurance that your data never leaves your perimeter.\"",
+                hero_pitch: "CameleoAI brings the power of Generative AI directly to your infrastructure. No external API calls, no data leakage, and full compliance with OJK standards. Experience the speed of local inference with the intelligence of state-of-the-art models.",
+                hero_card_title: "Secure. Encrypted. Sovereign.",
+                net_analyzer_desc: "<strong style='color: var(--text-main);'>Net Analyzer</strong> is a forensic-grade PCAP and flow analysis platform built for speed, trust, and explainability—combining high-performance ingestion (PCAP/CSV/Parquet), advanced telemetry (JA3/TLS fingerprinting, entropy, drift detection), and a hybrid neuro-symbolic engine that fuses heuristic sensors with Bayesian reasoning to produce clear, auditable threat conclusions and interactive what-if simulations. Powered by a Rust backend, it delivers deterministic, memory-safe processing with low CPU overhead, enabling fast analysis on large captures while reducing crash risk and supply-chain exposure—critical for SOC and CISO environments. Every artifact is protected with SHA-256 chain-of-custody, privacy redaction (“Masked Mode”), and backend-verified results, so teams can confidently investigate incidents, generate compliance-ready reports, and share findings without compromising integrity or sensitive data.",
+                ordering_title: "AI-Powered Compliance Automation",
+                ordering_subtitle: "Reducing Risk. Accelerating Compliance.",
+                ordering_desc: "Highly regulated sectors such as banking, telecommunications, healthcare, and government face increasing complexity in managing regulatory reporting, risk monitoring, sensitive data governance, and compliance documentation. These processes often remain manual, fragmented, and resource-intensive — leading to delays, higher operational costs, and increased risk exposure, particularly for mid-tier institutions and public organizations. CameleoAI EIP streamlines compliance workflows through governed, evidence-linked AI-driven documentation, enabling structured, traceable, and regulator-ready outputs that strengthen operational efficiency and institutional trust.",
+                complaint_title: "Addressing Customer Service Transformation",
+                complaint_subtitle: "24/7 Triaging & Empathy",
+                complaint_desc: "Indonesian enterprises widely use WhatsApp for customer engagement. Although banks, telcos, hospitals, and government institutions rely heavily on WhatsApp as their primary digital touchpoint, service processes often remain manual, inconsistent, and costly. CameleoAI EIP addresses this gap through intelligent workflow automation, enabling context-aware, multilingual, WhatsApp-native AI agents that instantly improve service speed and quality while maintaining strict regulatory compliance. Customers feel heard and helped fast, while your team focuses on exceptions instead of repeating the same explanations all day.",
+                mission_title: "Mission",
+                mission_desc: "Deliver a <strong>secure, on-premise, fully functional GenAI assistant</strong> capable of document intelligence & agentic automation.",
+                perf_title: "Performance",
+                perf_desc: "Optimized for high-performance edge compute, demonstrating power without the cloud.",
+                comp_title: "Compliance Ready",
+                comp_desc: "Built with <strong>OJK (Otoritas Jasa Keuangan)</strong> standards in mind, showcasing strict compliance and RAG capabilities.",
+                features_title: "Platform Capabilities",
+                features_subtitle: "Enterprise-grade features available today",
+                arch_title: "System Architecture",
+                arch_desc: "Secure, Modular, and Scalable Design",
+                roadmap_title: "Enterprise Product Vision",
+                business_benefit: "Business Benefit",
+
+                // Features Mapping (15 Total)
+                feat_rag_title: "RAG Foundation",
+                feat_rag_desc: "Upload OJK PDFs and convert them into searchable vector representations locally.",
+                feat_rag_benefit: "Instantly transforms regulatory documents into actionable knowledge.",
+
+                feat_qa_title: "Intelligent Workflow Builder",
+                feat_qa_desc: "Workflow Builder streamlines business automation with fast no-code design and seamless integrations.",
+                feat_qa_benefit: "Empower teams with fast, flexible automation that adapts to real business needs.",
+
+                feat_cite_title: "Omni-Channel Support",
+                feat_cite_desc: "Connect with customers across platforms including WhatsApp, Messenger, and Telegram from a single dashboard.",
+                feat_cite_benefit: "Meet your customers where they are and provide seamless support.",
+
+                feat_agent_title: "Agentic Capabilities",
+                feat_agent_desc: "<ul style='list-style: none; font-size: 0.9em; color: var(--text-muted); line-height: 1.8;'><li>• <strong>Folder Agent:</strong> Intelligent file management</li><li>• <strong>Currency Agent:</strong> Real-time market data</li><li>• <strong>Kafka Agent:</strong> Enterprise event streaming</li><li>• <strong>RAG Agent:</strong> Specialized compliance output</li></ul>",
+                feat_agent_benefit: "Modular, action-oriented AI ready for deep system integration.",
+
+                feat_chat_title: "Smart Chat UI",
+                feat_chat_desc: "History list, rename/delete options, and multi-context support.",
+                feat_chat_benefit: "Shows product maturity and usability for diverse workflows.",
+
+                feat_api_title: "Seamless Integration",
+                feat_api_desc: "Backend support for secure API key generation and validation for external apps.",
+                feat_api_benefit: "Connect your AI ecosystem with existing enterprise dashboards effortlessly.",
+
+                feat_tenant_title: "Multi-Tenant Management",
+                feat_tenant_desc: "Full user & tenant isolation for enterprise-scale deployment.",
+                feat_tenant_benefit: "Enables secure data separation for different departments or agencies.",
+
+                feat_router_title: "LLM Router",
+                feat_router_desc: "Switch between models via UI; includes model registry & configuration.",
+                feat_router_benefit: "Flexibility to optimize for cost, speed, or accuracy per use case.",
+
+                feat_sahabat_title: "Guardrails",
+                feat_sahabat_desc: "Ensures safe, compliant AI by controlling outputs, protecting data, and preventing risks.",
+                feat_sahabat_benefit: "Enables safe, responsible AI deployment across your organization.",
+
+                feat_wa_title: "Secure & Reliable",
+                feat_wa_desc: "Inbound/outbound message processing with enterprise-grade encryption and security.",
+                feat_wa_benefit: "Keep your enterprise conversations safe with top-tier security standards.",
+
+                feat_jira_title: "Trouble Ticketing",
+                feat_jira_desc: "Create, update, and view tickets directly from chat within your existing workflow.",
+                feat_jira_benefit: "End-to-end automation seamlessly connecting chat to service management.",
+
+                feat_cloud_title: "Global Reach",
+                feat_cloud_desc: "Break language barriers with built-in multi-language support for global audiences.",
+                feat_cloud_benefit: "Communicate seamlessly with users in their preferred language.",
+
+                feat_adv_rag_title: "Advanced RAG Pipeline",
+                feat_adv_rag_desc: "Header-aware chunking with semantic overlap optimized for complex regulatory data.",
+                feat_adv_rag_benefit: "Critical accuracy boost for legal and regulatory AI search results.",
+
+                feat_rbac_title: "RBAC Architecture",
+                feat_rbac_desc: "Comprehensive role-based access control engine for enterprise security.",
+                feat_rbac_benefit: "Enterprise-grade security foundation for multi-agency management.",
+
+                feat_style_title: "Mobile Friendly",
+                feat_style_desc: "Access your dashboard and AI agents on any device with responsive web design.",
+                feat_style_benefit: "Stay connected and productive from anywhere, at any time.",
+
+                // Roadmap
+                road_access_title: "Advanced Access Control",
+                road_access_desc: "Deep tenant isolation with granular roles (Admin, Analyst, Auditor) across all agents to ensure maximum government-standard security.",
+                road_obs_title: "Centralized Observability",
+                road_obs_desc: "Full Prometheus + Grafana + OpenTelemetry integration for monitoring AI usage, latency, and agent activities in real-time.",
+                road_sop_title: "SOP & PDF Extraction Agent",
+                road_sop_desc: "Automated policy search and structured ingestion pipelines—tailored for Banking and Pemda compliance.",
+                road_multi_title: "Multi-Modal Input",
+                road_multi_desc: "Support for PDF, Image, and CSV inputs unlocking use cases like invoice reading and anomaly detection.",
+                road_flow_title: "Workflow Orchestration",
+                road_flow_desc: "Visual flow builder (Ask → Analyze → Retrieve → Trigger) to democratize real enterprise automation.",
+                road_opt_title: "Model Performance Optimizer",
+                road_opt_desc: "Intelligent model routing based on latency & accuracy benchmarks for distinct workloads (Mistral, SahabatAI).",
+                road_deploy_title: "Secure Deployment Blueprints",
+                road_deploy_desc: "Turnkey patterns for Single-node RAG, Air-gapped clusters, and Multi-tenant environments.",
+                road_vert_title: "Vertical-Specific Templates",
+                road_vert_desc: "Pre-configured assistants for Banking (AML), Government (SOP), and Telco (Ticketing) sectors.",
+
+                challenges_title: "Addressing Indonesia Enterprise Operational <br>AI-Transformation Challenges",
+                challenge_1_title: "Regulatory and Compliance Complexities",
+                challenge_1_desc: "Integrated Guardrail, citation-supported RAG pipelines alleviate these challenges and foster regulator trust.",
+                challenge_2_title: "Sovereign and Secure Infrastructure",
+                challenge_2_desc: "Sovereign, on-premises, Indonesia-compliant AI infrastructure designed for secure environments.",
+                challenge_3_title: "Intelligent Workflow Automation",
+                challenge_3_desc: "WhatsApp-native AI agents instantly enhance service quality while ensuring full regulatory compliance.."
+            },
+            id: {
+                nav_get_started: "Mulai Sekarang",
+                hero_eyebrow: "Masa Depan Privasi-First",
+                hero_title: "Mengapa Enterprise Butuh Local <span class=\"text-gradient\">On-Prem LLM</span>",
+                hero_desc: "Di era di mana data adalah emas baru, ketergantungan pada model public cloud mengekspos enterprise pada risiko yang tak terduga. Kedaulatan, latensi, dan kepatuhan bukan sekadar kata kunci—mereka adalah pilar keamanan operasional modern.",
+                hero_quote: "\"Kecerdasan sejati tidak hanya membutuhkan daya pemrosesan, tetapi jaminan mutlak bahwa data Anda tidak pernah meninggalkan perimeter Anda.\"",
+                hero_pitch: "CameleoAI membawa kekuatan Generative AI langsung ke infrastruktur Anda. Tanpa panggilan API eksternal, tanpa kebocoran data, dan kepatuhan penuh terhadap standar OJK. Rasakan kecepatan inferensi lokal dengan kecerdasan model state-of-the-art.",
+                hero_card_title: "Aman. Terenkripsi. Berdaulat.",
+                net_analyzer_desc: "<strong style='color: var(--text-main);'>Net Analyzer</strong> adalah platform analisis PCAP dan flow data kelas forensik yang dibangun untuk kecepatan, kepercayaan, dan eksplanabilitas—menggabungkan ingesti berperforma tinggi (PCAP/CSV/Parquet), telemetri canggih (pemindaian JA3/TLS, entropi, deteksi drift), dan mesin neuro-simbolik hibrida yang memadukan sensor heuristik dengan penalaran Bayesian untuk menghasilkan kesimpulan ancaman yang jelas dan dapat diaudit serta simulasi what-if interaktif. Didorong oleh Rust backend, ia memberikan pemrosesan deterministik dan aman memori dengan overhead CPU yang rendah, memungkinkan analisis cepat pada tangkapan besar sambil mengurangi risiko crash dan eksposur rantai pasokan—kritis bagi lingkungan SOC dan CISO. Setiap artefak dilindungi dengan rantai kepemilikan SHA-256, redaksi privasi (“Masked Mode”), dan hasil yang diverifikasi di backend, sehingga tim dapat menyelidiki insiden dengan percaya diri, menghasilkan laporan siap kepatuhan, dan berbagi temuan tanpa mengompromikan integritas atau data sensitif.",
+                ordering_title: "Penanganan Pesanan",
+                ordering_subtitle: "Dari Permintaan Chat ke Pesanan Terkonfirmasi",
+                ordering_desc: "GenAI mengubah penanganan pesanan dengan mengubah permintaan chat menjadi pesanan yang jelas dan akurat tanpa hambatan.",
+                complaint_title: "Penanganan Keluhan",
+                complaint_subtitle: "24/7 Triaging & Empathy",
+                complaint_desc: "Penanganan keluhan biasanya merupakan kasus penggunaan GenAI yang berdampak paling tinggi karena volume tinggi, sensitivitas waktu, dan muatan emosional.",
+                mission_title: "Misi",
+                mission_desc: "Menghadirkan <strong>asisten GenAI on-premise yang aman dan fungsional penuh</strong> yang mampu melakukan document intelligence & agentic automation.",
+                perf_title: "Performa",
+                perf_desc: "Dioptimalkan untuk edge compute berperforma tinggi, menunjukkan kekuatan tanpa ketergantungan pada cloud.",
+                comp_title: "Siap Kepatuhan",
+                comp_desc: "Dibangun dengan memperhatikan standar <strong>OJK (Otoritas Jasa Keuangan)</strong>, menampilkan kepatuhan ketat dan kapabilitas RAG.",
+                features_title: "Kapabilitas Platform",
+                features_subtitle: "Fitur kelas Enterprise tersedia hari ini",
+                arch_title: "Arsitektur Sistem",
+                arch_desc: "Desain Aman, Modular, dan Skalabel",
+                roadmap_title: "Visi Produk Enterprise",
+                business_benefit: "Manfaat Bisnis",
+
+                // Features Mapping (15 Total)
+                feat_rag_title: "Fondasi RAG",
+                feat_rag_desc: "Unggah PDF OJK dan konversi menjadi representasi vektor yang dapat dicari secara lokal.",
+                feat_rag_benefit: "Secara instan mengubah dokumen regulasi menjadi pengetahuan yang dapat ditindaklanjuti.",
+
+                feat_qa_title: "Pembuat Alur Kerja Cerdas",
+                feat_qa_desc: "Workflow Builder merampingkan otomatisasi bisnis dengan desain no-code yang cepat dan integrasi yang mulus.",
+                feat_qa_benefit: "Memberdayakan tim dengan otomatisasi yang cepat dan fleksibel yang beradaptasi dengan kebutuhan bisnis nyata.",
+
+                feat_cite_title: "Dukungan Omni-Channel",
+                feat_cite_desc: "Terhubung dengan pelanggan di berbagai platform termasuk WhatsApp, Messenger, dan Telegram dari satu dashboard.",
+                feat_cite_benefit: "Temui pelanggan Anda di tempat mereka berada dan berikan dukungan tanpa hambatan.",
+
+                feat_agent_title: "Kapabilitas Agen",
+                feat_agent_desc: "<ul style='list-style: none; font-size: 0.9em; color: var(--text-muted); line-height: 1.8;'><li>• <strong>Folder Agent:</strong> Manajemen file cerdas</li><li>• <strong>Currency Agent:</strong> Data pasar real-time</li><li>• <strong>Kafka Agent:</strong> Streaming event enterprise</li><li>• <strong>RAG Agent:</strong> Output kepatuhan khusus</li></ul>",
+                feat_agent_benefit: "AI modular berorientasi tindakan yang siap untuk integrasi sistem yang mendalam.",
+
+                feat_chat_title: "Antarmuka Chat Pintar",
+                feat_chat_desc: "Daftar riwayat, opsi ganti nama/hapus, dan dukungan multi-konteks.",
+                feat_chat_benefit: "Menunjukkan kematangan produk dan kemudahan penggunaan untuk berbagai alur kerja.",
+
+                feat_api_title: "Integrasi Mulus",
+                feat_api_desc: "Dukungan backend untuk pembuatan dan validasi kunci API yang aman untuk aplikasi eksternal.",
+                feat_api_benefit: "Hubungkan ekosistem AI Anda dengan dashboard perusahaan yang ada dengan mudah.",
+
+                feat_tenant_title: "Manajemen Multi-Tenant",
+                feat_tenant_desc: "Isolasi penuh pengguna & tenant untuk deployment skala perusahaan.",
+                feat_tenant_benefit: "Memungkinkan pemisahan data yang aman untuk departemen atau agensi yang berbeda.",
+
+                feat_router_title: "Router LLM",
+                feat_router_desc: "Beralih antar model melalui UI; termasuk registrasi & konfigurasi model.",
+                feat_router_benefit: "Fleksibilitas untuk mengoptimalkan biaya, kecepatan, atau akurasi per kasus penggunaan.",
+
+                feat_sahabat_title: "Guardrails",
+                feat_sahabat_desc: "Memastikan AI aman dan patuh dengan mengontrol output, melindungi data, dan mencegah risiko.",
+                feat_sahabat_benefit: "Memungkinkan penerapan AI yang aman dan bertanggung jawab di organisasi Anda.",
+
+                feat_wa_title: "Aman & Terpercaya",
+                feat_wa_desc: "Pemrosesan pesan masuk/keluar dengan enkripsi dan keamanan kelas perusahaan.",
+                feat_wa_benefit: "Jaga keamanan percakapan bisnis Anda dengan standar keamanan tertinggi.",
+
+                feat_jira_title: "Manajemen Tiket",
+                feat_jira_desc: "Buat, perbarui, dan lihat tiket langsung dari chat dalam alur kerja Anda yang sudah ada.",
+                feat_jira_benefit: "Otomatisasi ujung-ke-ujung yang menghubungkan chat dengan manajemen layanan secara mulus.",
+
+                feat_cloud_title: "Jangkauan Global",
+                feat_cloud_desc: "Hapus batasan bahasa dengan dukungan multibahasa bawaan untuk audiens global.",
+                feat_cloud_benefit: "Berkomunikasi secara lancar dengan pengguna dalam bahasa pilihan mereka.",
+
+                feat_adv_rag_title: "Pipeline RAG Lanjutan",
+                feat_adv_rag_desc: "Chunking berbasis header dengan tumpang tindih semantik yang dioptimalkan untuk data regulasi kompleks.",
+                feat_adv_rag_benefit: "Peningkatan akurasi kritis untuk hasil pencarian AI hukum dan regulasi.",
+
+                feat_rbac_title: "Arsitektur RBAC",
+                feat_rbac_desc: "Mesin kontrol akses berbasis peran (RBAC) yang komprehensif untuk keamanan perusahaan.",
+                feat_rbac_benefit: "Fondasi keamanan kelas perusahaan untuk manajemen multi-agensi.",
+
+                feat_style_title: "Ramah Seluler",
+                feat_style_desc: "Akses dashboard dan agen AI di perangkat apa pun dengan desain web responsif.",
+                feat_style_benefit: "Tetap terhubung dan produktif dari mana saja, kapan saja.",
+
+                // Roadmap
+                road_access_title: "Kontrol Akses Tingkat Lanjut",
+                road_access_desc: "Isolasi tenant mendalam dengan peran granular (Admin, Analis, Auditor) di semua agen untuk memastikan keamanan standar pemerintah yang maksimal.",
+                road_obs_title: "Observabilitas Terpusat",
+                road_obs_desc: "Integrasi penuh Prometheus + Grafana + OpenTelemetry untuk memantau penggunaan AI, latensi, dan aktivitas agen secara real-time.",
+                road_sop_title: "Agen Ekstraksi SOP & PDF",
+                road_sop_desc: "Pencarian kebijakan otomatis dan pipeline ingesti terstruktur—disesuaikan untuk kepatuhan Perbankan dan Pemda.",
+                road_multi_title: "Input Multi-Modal",
+                road_multi_desc: "Dukungan untuk input PDF, Gambar, dan CSV untuk membuka kasus penggunaan seperti pembacaan faktur dan deteksi anomali.",
+                road_flow_title: "Orkestrasi Alur Kerja",
+                road_flow_desc: "Visual flow builder (Ask → Analyze → Retrieve → Trigger) untuk mendemokratisasi otomatisasi perusahaan yang nyata.",
+                road_opt_title: "Pengoptimal Performa Model",
+                road_opt_desc: "Routing model cerdas berdasarkan tolok ukur latensi & akurasi untuk beban kerja yang berbeda (Mistral, SahabatAI).",
+                road_deploy_title: "Blueprint Deployment Aman",
+                road_deploy_desc: "Pola siap pakai untuk RAG Single-node, cluster Air-gapped, dan lingkungan Multi-tenant.",
+                road_vert_title: "Template Spesifik Vertikal",
+                road_vert_desc: "Asisten pra-konfigurasi untuk sektor Perbankan (AML), Pemerintah (SOP), dan Telco (Ticketing).",
+
+                challenges_title: "Menangani Tantangan Transformasi AI <br>Operasional Enterprise Indonesia",
+                challenge_1_title: "Kompleksitas Regulasi dan Kepatuhan",
+                challenge_1_desc: "Guardrail terintegrasi dan pipeline RAG yang didukung sitasi membantu mengatasi tantangan ini serta membangun kepercayaan regulator.",
+                challenge_2_title: "Infrastruktur Berdaulat dan Aman",
+                challenge_2_desc: "Infrastruktur AI berdaulat, on-premises, dan sesuai regulasi Indonesia yang dirancang untuk lingkungan dengan kebutuhan keamanan tinggi.",
+                challenge_3_title: "Otomatisasi Alur Kerja Cerdas",
+                challenge_3_desc: "Agen AI native WhatsApp secara instan meningkatkan kualitas layanan sekaligus memastikan kepatuhan regulasi secara menyeluruh.",
+
+                roadmap_title: "Visi Produk Perusahaan",
+
+            }
+        };
+
+        function setLanguage(lang) {
+            // Update active button state
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+
+            // Update text content
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key]; // innerHTML to preserve spans/strong tags
+                }
+            });
+        }
+
+
+        /* ----------------------------------------------------------------
+           Neural Network Particle Background
+           ---------------------------------------------------------------- */
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Configuration
+        const particleCount = 60; // Low count for performance but enough for visual
+        const connectionDist = 150;
+        const mouseDist = 200;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(99, 102, 241, 0.4)'; // Primary color low opacity
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+
+                // Connect particles
+                for (let j = index + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < connectionDist) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(168, 85, 247, ${0.15 * (1 - dist / connectionDist)})`; // Secondary color
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Connect to mouse
+                if (mouse.x) {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < mouseDist) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(236, 72, 153, ${0.2 * (1 - dist / mouseDist)})`; // Accent color
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* ----------------------------------------------------------------
+           Interactive Chat Playground Loop
+           ---------------------------------------------------------------- */
+        const chatContainer = document.getElementById('chat-stream');
+
+        const conversationData = [
+            {
+                type: 'user',
+                text: "I need to order 500 game vouchers for our marketing campaign next week."
+            },
+            {
+                type: 'ai',
+                text: "I can help with that. Which game title is this for (e.g., Mobile Legends, PUBG)? And do you require a tax invoice for this transaction?",
+                citation: "Action: Identifying Intent -> Bulk Order"
+            },
+            {
+                type: 'user',
+                text: "Mobile Legends. Yes, need tax invoice. Also, what's the status of ticket #9921 regarding the failed top-up?"
+            },
+            {
+                type: 'ai',
+                text: "Noted. I've created a draft order for **500 MLBB Vouchers** with tax invoice included. \n\nRegarding **Ticket #9921**: The transaction was refunded successfully at 10:15 AM today. \n\nShall I proceed with submitting the new voucher order?",
+                citation: "Action: Order Drafted & Ticket Status Retrieved"
+            }
+        ];
+
+        async function typeWriter(text, element) {
+            // Very simple markdown parser for bolding
+            const formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+
+            // To animate actual typing, we need to be clever or just append chunks. 
+            // For simplicity/reliability in pure JS here, we'll append characters but parse HTML logic is complex.
+            // Let's just fade in the full message for "Agent" thinking and typing simulation
+
+            // Simulation approach:
+            // 1. Show empty bubble with typing indicator
+            // 2. Wait
+            // 3. Replace with full text
+
+            return new Promise(resolve => {
+                const indicator = document.createElement('div');
+                indicator.className = 'typing-indicator';
+                indicator.innerHTML = '<span></span><span></span><span></span>';
+                element.appendChild(indicator);
+
+                setTimeout(() => {
+                    element.removeChild(indicator);
+                    element.innerHTML += "";
+
+                    let i = 0;
+                    // Strip HTML tags for typing count, but actually we just want to show the content.
+                    // For a "Wow" factor, let's stream it fast.
+
+                    element.innerHTML = formatted;
+                    element.style.opacity = 0;
+                    element.style.animation = "fadeInMsg 0.5s forwards";
+                    resolve();
+
+                }, 1500); // "Thinking" time
+            });
+        }
+
+        async function runChatDemo() {
+            chatContainer.innerHTML = '';
+
+            for (const turn of conversationData) {
+                // Create message container
+                const row = document.createElement('div');
+                row.className = 'msg fade-in';
+
+                const avatar = document.createElement('div');
+                avatar.className = `msg-avatar ${turn.type}`;
+                avatar.textContent = turn.type === 'user' ? 'U' : 'AI';
+
+                const content = document.createElement('div');
+                content.className = 'msg-content';
+
+                row.appendChild(avatar);
+                row.appendChild(content);
+                chatContainer.appendChild(row);
+
+                if (turn.type === 'user') {
+                    // User "types" fast
+                    content.textContent = turn.text;
+                    await new Promise(r => setTimeout(r, 1000));
+                } else {
+                    // AI "thinks" and types
+                    await typeWriter(turn.text, content);
+
+                    if (turn.citation) {
+                        const cite = document.createElement('div');
+                        cite.className = 'citation';
+                        cite.textContent = turn.citation;
+                        content.appendChild(cite);
+                    }
+                    await new Promise(r => setTimeout(r, 2000)); // Read time
+                }
+            }
+
+            // Loop functionality
+            setTimeout(runChatDemo, 3000);
+        }
+
+        // Start after a slight delay
+        setTimeout(runChatDemo, 1000);
+
+        /* ----------------------------------------------------------------
+           Carousel Logic
+           ---------------------------------------------------------------- */
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (index + totalSlides) % totalSlides;
+
+            if (slides[currentSlide]) slides[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            // Reset interval to avoid jumpy transitions
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        let slideInterval = setInterval(nextSlide, 5000);
+    </script>
+</body>
+
+</html>
